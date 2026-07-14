@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Privacy Policy — SvarLock</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="wrap">
+  <header class="site">
+    <div class="logo">SvarLock</div>
+    <nav class="top">
+      <a href="index.html">Home</a>
+      <a href="terms-of-service.html">Terms</a>
+    </nav>
+  </header>
+
+  <h1>Privacy Policy for SvarLock</h1>
+  <p class="updated"><strong>Last updated: 10 July 2026</strong></p>
+
+  <div class="card">
+    <p><strong>The short version</strong></p>
+    <p>SvarLock runs entirely on your phone. It has <strong>no internet access</strong>, so it <strong>cannot</strong> send your data anywhere. Not to us, not to advertisers, not to anyone.</p>
+    <ul>
+      <li>No account. No sign-up. No email required.</li>
+      <li>No ads, no analytics, no tracking, no advertising IDs.</li>
+      <li>No servers. We never receive your PIN, your app list, or your usage.</li>
+      <li>Everything SvarLock stores stays in the app's private storage on your device. Uninstall the app and it's gone.</li>
+    </ul>
+    <p>The sections below explain this in full.</p>
+  </div>
+
+  <h2>1. Who this policy covers</h2>
+  <p>This policy describes how the SvarLock app (package <code>com.svarlock.app</code>, "SvarLock", "the app", "we", "us") handles your information. It applies to the SvarLock Android application published by <strong>SvarLock</strong> and to nothing else. Links or apps from other companies are governed by their own policies.</p>
+
+  <h2>2. We do not collect your personal data</h2>
+  <p>SvarLock does <strong>not</strong> request the Android <code>INTERNET</code> permission. The app has no networking code, no third-party SDKs that phone home, no advertising libraries, and no analytics or crash-reporting services. Because of this, the app is technically unable to transmit your information off your device.</p>
+  <p>We do <strong>not</strong> collect, receive, store on our servers, or share any of the following:</p>
+  <ul>
+    <li>Your name, email address, phone number, or any account details (there are no accounts).</li>
+    <li>Your location.</li>
+    <li>Your contacts, messages, photos, or files.</li>
+    <li>Advertising identifiers or device fingerprints.</li>
+    <li>Analytics, behavioural data, or usage statistics about how you use the app.</li>
+  </ul>
+  <p>We have no servers and no back end. There is nothing for us to see.</p>
+  <p>This is separate from Google Play itself. If you've opted in to sharing diagnostics with Google on your device, the Play Store platform may collect basic technical data (such as crash or app-not-responding reports) about apps you've installed, including SvarLock. That collection happens at the operating-system level, is outside our control, and is governed by <a href="https://policies.google.com/privacy">Google's own privacy policy</a>, not this one.</p>
+
+  <h2>3. What SvarLock stores on your device</h2>
+  <p>To do its job, SvarLock keeps a small amount of data in its <strong>own private storage</strong> on your device (Android Jetpack DataStore). This data never leaves the device on its own. It includes:</p>
+  <table>
+    <thead>
+      <tr><th>What</th><th>Why it exists</th><th>Notes</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>A <strong>salted hash of your PIN</strong></td>
+        <td>To check your PIN when you unlock</td>
+        <td>We store a SHA-256 hash combined with a random salt, <strong>never your actual PIN</strong>. The PIN cannot be read back from what is stored.</td>
+      </tr>
+      <tr>
+        <td>The <strong>list of apps you choose to lock</strong></td>
+        <td>So SvarLock knows what to protect</td>
+        <td>Stored as Android package names (e.g. <code>com.whatsapp</code>) on the device only.</td>
+      </tr>
+      <tr>
+        <td>Your <strong>settings</strong></td>
+        <td>To remember your choices</td>
+        <td>For example: whether biometric unlock is on, your relock timeout, whether uninstall protection is on, setup-completion flags, whether Protection alerts is on, whether you've already been shown a protection-off alert, when the last background protection check ran, and whether Pro is active.</td>
+      </tr>
+      <tr>
+        <td>A small <strong>local diagnostic buffer</strong></td>
+        <td>To help you troubleshoot if protection misbehaves</td>
+        <td>An in-memory list of recent app-detection events, cleared when SvarLock restarts. See section 6.</td>
+      </tr>
+    </tbody>
+  </table>
+  <p>App backup is disabled (<code>allowBackup="false"</code>), so this data is excluded from Android's automatic cloud backup.</p>
+
+  <h2>4. Biometric unlock</h2>
+  <p>If you turn on fingerprint or face unlock, SvarLock uses the standard Android <strong>BiometricPrompt</strong> system. Your biometric data is held by your device's secure hardware and the Android operating system. <strong>SvarLock never sees, receives, or stores your fingerprint or face data.</strong> All we keep is a simple on/off setting recording that you enabled biometric unlock.</p>
+
+  <h2>5. Permissions we request, and why</h2>
+  <p>SvarLock asks only for the permissions it needs to lock apps. Each is explained in the app before you are prompted.</p>
+  <ul>
+    <li><strong>Usage Access (<code>PACKAGE_USAGE_STATS</code>)</strong>: to detect which app has come to the foreground, so the lock screen can appear over a locked app. We read this only in the moment to decide whether to show the lock screen. We do not build a profile of your usage, and nothing is transmitted.</li>
+    <li><strong>Display over other apps (<code>SYSTEM_ALERT_WINDOW</code>)</strong>: to show the SvarLock lock screen on top of a locked app.</li>
+    <li><strong>Run a foreground service (<code>FOREGROUND_SERVICE</code>, <code>FOREGROUND_SERVICE_SPECIAL_USE</code>)</strong>: to keep protection running quietly in the background.</li>
+    <li><strong>Start at boot (<code>RECEIVE_BOOT_COMPLETED</code>)</strong>: to restore protection after the device restarts.</li>
+    <li><strong>Ignore battery optimisation (<code>REQUEST_IGNORE_BATTERY_OPTIMIZATIONS</code>)</strong>: optional, lets you stop aggressive power-saving from killing the protection service.</li>
+    <li><strong>Biometrics (<code>USE_BIOMETRIC</code>, <code>USE_FINGERPRINT</code>)</strong>: to offer fingerprint/face unlock (see section 4).</li>
+    <li><strong>See your installed apps (<code>QUERY_ALL_PACKAGES</code>)</strong>: to show the list of apps you can choose to lock. The list is used on-device for selection only and is never sent anywhere.</li>
+    <li><strong>Post notifications (<code>POST_NOTIFICATIONS</code>, optional, off by default)</strong>: only requested if you turn on <strong>Protection alerts</strong> in Settings, never during setup, so SvarLock can tell you if protection turns off. Turning it on also makes a second, already-existing notification visible, the quiet one that shows while protection runs in the background, since Android turns notifications on or off for the whole app at once, not one at a time.</li>
+    <li><strong>Device administrator (optional, off by default)</strong>: only if you turn on uninstall (device-administrator) protection, so SvarLock can't be removed or force-stopped while that option is on. It enforces no other policies and does not change your device settings, passwords, or data.</li>
+  </ul>
+  <p>We do not request location, contacts, microphone, SMS, or storage permissions for your media. SvarLock does not request the Camera permission either, see the background checks section below for the one camera-related signal it does use.</p>
+
+  <h2>Background protection checks</h2>
+  <p>SvarLock periodically checks, entirely on your device, that protection is still running, roughly every few minutes, so it can restart itself if a phone's battery-saving system killed it in the background. This check reads no personal data and never leaves the device.</p>
+  <p>If you turn on the optional <strong>Protection alerts</strong> toggle in Settings, SvarLock shows a notification when one of these checks finds that protection is off, so you can fix it without having to keep opening the app. This is off by default and only asks for the notification permission described above when you turn it on.</p>
+  <p>Some camera apps can open faster than SvarLock's normal check can catch. To close that gap, SvarLock also listens for a simple on or off signal from Android: is the camera being used right now, not what it's pointed at or what it sees. This needs no Camera permission and gives SvarLock no access to any photo, video, or image, ever. SvarLock only uses this signal to decide whether to show the lock screen.</p>
+
+  <h2>6. The diagnostic log (optional, only if you export it)</h2>
+  <p>SvarLock keeps an in-memory, on-device diagnostic buffer of recent app-detection events to help you troubleshoot reliability problems. This stays on the device unless <strong>you</strong> choose to export it.</p>
+  <p>If you tap <strong>Export diagnostic log</strong> in Settings, SvarLock writes the buffer to a file and opens Android's standard share sheet so you can send it wherever you choose (for example, to email it to support). That file may include the names or package IDs of apps recently detected in the foreground, the names of screens SvarLock showed, camera on or off events from the signal described in section 5 (never a photo, video, or image), and your device manufacturer, model, and Android version, to help with troubleshooting. Once you share it, the file is handled by whatever app or service you send it to, under that service's terms. We do not receive it automatically and have no way to access it.</p>
+
+  <h2>7. We do not share or sell your data</h2>
+  <p>Because we don't collect your data, we have nothing to share, sell, rent, or disclose to third parties or advertisers. SvarLock contains no advertising or marketing trackers.</p>
+
+  <h2>8. Purchases (if and when Pro launches)</h2>
+  <p>SvarLock is free and locks up to 3 apps at no cost. A Pro tier is planned but not active in this version. If paid features are introduced, payments will be handled by <strong>Google Play Billing</strong>. In that case, Google, not SvarLock, processes the transaction, and we do not receive your card number or payment details. Google's handling of payments is governed by Google's own privacy policy.</p>
+
+  <h2>9. Data retention and deletion</h2>
+  <p>Your data stays on your device until you remove it. You are always in control:</p>
+  <ul>
+    <li><strong>Change or reset your settings</strong> inside the app at any time.</li>
+    <li><strong>Clear the app's storage</strong> from Android Settings → Apps → SvarLock → Storage.</li>
+    <li><strong>Uninstall SvarLock</strong> to delete all of its on-device data. If you turned on uninstall (device-administrator) protection, turn that off first so the app can be removed.</li>
+  </ul>
+  <p>Since none of your data reaches us, there is no copy on our side to request or delete.</p>
+
+  <h2>10. Children's privacy</h2>
+  <p>SvarLock is a general-purpose utility and is not directed to children. It collects no personal information from anyone, including children.</p>
+
+  <h2>11. Your privacy rights</h2>
+  <p>This section is written with reference to <strong>India's Digital Personal Data Protection Act (DPDP Act)</strong>, since that is the law that governs this policy (section 14). Under it, you may have rights to access, correct, delete, or port your personal data, and to object to its processing. SvarLock holds <strong>no personal data about you on any server</strong>, so there is nothing for us to retrieve, export, or erase on our end. All of your data already lives solely on your device and is entirely under your control, as described in section 9. If you believe you need to exercise a privacy right, contact us using the details below and we will respond as required.</p>
+
+  <h2>12. Security</h2>
+  <p>Your PIN is never stored in plain form. Only a salted SHA-256 hash is kept, from which the PIN cannot be recovered. All app data is held in SvarLock's private, sandboxed storage and is excluded from cloud backup. No system can guarantee perfect security, but because SvarLock keeps everything on-device and transmits nothing, the exposure surface is intentionally minimal.</p>
+
+  <h2>13. Changes to this policy</h2>
+  <p>If we change how SvarLock handles data, we will update this policy and revise the "Last updated" date above. Material changes will be reflected in the app's store listing. Continuing to use the app after an update means you accept the revised policy.</p>
+
+  <h2>14. Governing law</h2>
+  <p>This policy is governed by the laws of <strong>India</strong>, without regard to its conflict-of-laws rules.</p>
+
+  <h2>15. Contact</h2>
+  <p>Questions about this policy or your privacy? Contact:</p>
+  <p><strong>SvarLock</strong><br>Email: <strong>svarlock.app@gmail.com</strong></p>
+
+  <footer class="site">
+    <a href="index.html">&larr; Back</a> &middot; <a href="terms-of-service.html">Terms of Service</a>
+  </footer>
+</div>
+</body>
+</html>

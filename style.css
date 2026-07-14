@@ -1,0 +1,161 @@
+:root {
+  color-scheme: light dark;
+  --bg: #ffffff;
+  --text: #1a1a1a;
+  --text-medium: #55575c;
+  --border: #e5e5e5;
+  --link: #4f46e5;
+  --card-bg: #f7f7f8;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #14151a;
+    --text: #f0f0f1;
+    --text-medium: #a8a9ae;
+    --border: #2a2b31;
+    --link: #9d97f5;
+    --card-bg: #1c1d23;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.6;
+}
+
+.wrap {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 48px 24px 96px;
+}
+
+header.site {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 40px;
+}
+
+header.site .logo {
+  font-weight: 700;
+  font-size: 1.1rem;
+  letter-spacing: -0.01em;
+}
+
+nav.top a {
+  color: var(--text-medium);
+  text-decoration: none;
+  font-size: 0.95rem;
+  margin-left: 20px;
+}
+
+nav.top a:hover {
+  color: var(--link);
+}
+
+h1 {
+  font-size: 1.9rem;
+  margin: 0 0 6px;
+  letter-spacing: -0.02em;
+}
+
+h2 {
+  font-size: 1.25rem;
+  margin: 2.2em 0 0.6em;
+  letter-spacing: -0.01em;
+}
+
+.updated {
+  color: var(--text-medium);
+  font-size: 0.9rem;
+  margin: 0 0 2.5em;
+}
+
+p, li {
+  color: var(--text);
+}
+
+ul, ol {
+  padding-left: 1.3em;
+}
+
+a {
+  color: var(--link);
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1.2em 0;
+  font-size: 0.95rem;
+}
+
+th, td {
+  border: 1px solid var(--border);
+  padding: 10px 12px;
+  text-align: left;
+  vertical-align: top;
+}
+
+th {
+  background: var(--card-bg);
+}
+
+.card {
+  background: var(--card-bg);
+  border-radius: 12px;
+  padding: 20px 24px;
+  margin: 1.5em 0;
+}
+
+.card ul {
+  margin: 0.4em 0;
+}
+
+.doc-list {
+  list-style: none;
+  padding: 0;
+  margin: 24px 0 0;
+}
+
+.doc-list li {
+  margin-bottom: 12px;
+}
+
+.doc-list a {
+  display: block;
+  padding: 18px 20px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  text-decoration: none;
+  color: var(--text);
+  font-weight: 600;
+}
+
+.doc-list a:hover {
+  border-color: var(--link);
+}
+
+.doc-list span {
+  display: block;
+  font-weight: 400;
+  color: var(--text-medium);
+  font-size: 0.9rem;
+  margin-top: 4px;
+}
+
+footer.site {
+  margin-top: 4em;
+  padding-top: 1.5em;
+  border-top: 1px solid var(--border);
+  color: var(--text-medium);
+  font-size: 0.85rem;
+}
