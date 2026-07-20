@@ -18,7 +18,7 @@
   </header>
 
   <h1>Privacy Policy for SvarLock</h1>
-  <p class="updated"><strong>Last updated: 10 July 2026</strong></p>
+  <p class="updated"><strong>Last updated: 18 July 2026</strong></p>
 
   <div class="card">
     <p><strong>The short version</strong></p>
@@ -73,7 +73,7 @@
       <tr>
         <td>A small <strong>local diagnostic buffer</strong></td>
         <td>To help you troubleshoot if protection misbehaves</td>
-        <td>An in-memory list of recent app-detection events, cleared when SvarLock restarts. See section 6.</td>
+        <td>An in-memory list of recent app-detection events, cleared when SvarLock restarts. Only present in copies of SvarLock distributed to internal and closed testers, not in the version available to the public on Google Play. See section 6.</td>
       </tr>
     </tbody>
   </table>
@@ -91,7 +91,7 @@
     <li><strong>Start at boot (<code>RECEIVE_BOOT_COMPLETED</code>)</strong>: to restore protection after the device restarts.</li>
     <li><strong>Ignore battery optimisation (<code>REQUEST_IGNORE_BATTERY_OPTIMIZATIONS</code>)</strong>: optional, lets you stop aggressive power-saving from killing the protection service.</li>
     <li><strong>Biometrics (<code>USE_BIOMETRIC</code>, <code>USE_FINGERPRINT</code>)</strong>: to offer fingerprint/face unlock (see section 4).</li>
-    <li><strong>See your installed apps (<code>QUERY_ALL_PACKAGES</code>)</strong>: to show the list of apps you can choose to lock. The list is used on-device for selection only and is never sent anywhere.</li>
+    <li><strong>See specific other apps</strong>: to show the list of apps you can choose to lock, to recognise your phone's home screen and its system uninstall screen so protection and uninstall protection behave correctly, and, on some phone brands, to check whether that brand's own battery or security app is installed so SvarLock can open the right settings screen for you. SvarLock cannot see every app on your device, only these specific ones for these specific purposes, and none of it is ever sent anywhere.</li>
     <li><strong>Post notifications (<code>POST_NOTIFICATIONS</code>, optional, off by default)</strong>: only requested if you turn on <strong>Protection alerts</strong> in Settings, never during setup, so SvarLock can tell you if protection turns off. Turning it on also makes a second, already-existing notification visible, the quiet one that shows while protection runs in the background, since Android turns notifications on or off for the whole app at once, not one at a time.</li>
     <li><strong>Device administrator (optional, off by default)</strong>: only if you turn on uninstall (device-administrator) protection, so SvarLock can't be removed or force-stopped while that option is on. It enforces no other policies and does not change your device settings, passwords, or data.</li>
   </ul>
@@ -102,8 +102,9 @@
   <p>If you turn on the optional <strong>Protection alerts</strong> toggle in Settings, SvarLock shows a notification when one of these checks finds that protection is off, so you can fix it without having to keep opening the app. This is off by default and only asks for the notification permission described above when you turn it on.</p>
   <p>Some camera apps can open faster than SvarLock's normal check can catch. To close that gap, SvarLock also listens for a simple on or off signal from Android: is the camera being used right now, not what it's pointed at or what it sees. This needs no Camera permission and gives SvarLock no access to any photo, video, or image, ever. SvarLock only uses this signal to decide whether to show the lock screen.</p>
 
-  <h2>6. The diagnostic log (optional, only if you export it)</h2>
-  <p>SvarLock keeps an in-memory, on-device diagnostic buffer of recent app-detection events to help you troubleshoot reliability problems. This stays on the device unless <strong>you</strong> choose to export it.</p>
+  <h2>6. The diagnostic log (test builds only, and only if you export it)</h2>
+  <p>This section applies only to copies of SvarLock distributed to internal and closed testers. The version available to the public on Google Play's Production track does not include this feature at all, the code that would collect or export it is not present in that build.</p>
+  <p>In those test builds, SvarLock keeps an in-memory, on-device diagnostic buffer of recent app-detection events to help testers and us troubleshoot reliability problems. This stays on the device unless <strong>you</strong> choose to export it.</p>
   <p>If you tap <strong>Export diagnostic log</strong> in Settings, SvarLock writes the buffer to a file and opens Android's standard share sheet so you can send it wherever you choose (for example, to email it to support). That file may include the names or package IDs of apps recently detected in the foreground, the names of screens SvarLock showed, camera on or off events from the signal described in section 5 (never a photo, video, or image), and your device manufacturer, model, and Android version, to help with troubleshooting. Once you share it, the file is handled by whatever app or service you send it to, under that service's terms. We do not receive it automatically and have no way to access it.</p>
 
   <h2>7. We do not share or sell your data</h2>
