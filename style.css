@@ -73,6 +73,12 @@ h2 {
   letter-spacing: -0.01em;
 }
 
+h3 {
+  font-size: 1.05rem;
+  margin: 1.6em 0 0.5em;
+  letter-spacing: -0.01em;
+}
+
 .updated {
   color: var(--text-medium);
   font-size: 0.9rem;

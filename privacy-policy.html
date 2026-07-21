@@ -37,7 +37,7 @@
   <p>This policy describes how the SvarLock app (package <code>com.svarlock.app</code>, "SvarLock", "the app", "we", "us") handles your information. It applies to the SvarLock Android application published by <strong>SvarLock</strong>, operated by <strong>Laplap apps</strong>, and to nothing else. Links or apps from other companies are governed by their own policies.</p>
 
   <h2>2. We do not collect your personal data</h2>
-  <p>SvarLock does <strong>not</strong> request the Android <code>INTERNET</code> permission. The app has no networking code, no third-party SDKs that phone home, no advertising libraries, and no analytics or crash-reporting services. Because of this, the app is technically unable to transmit your information off your device.</p>
+  <p>SvarLock does <strong>not</strong> request the Android internet permission. The app has no networking code, no third-party SDKs that phone home, no advertising libraries, and no analytics or crash-reporting services. Because of this, the app is technically unable to transmit your information off your device.</p>
   <p>We do <strong>not</strong> automatically collect, receive, store on our servers, or share any of the following:</p>
   <ul>
     <li>Your name, email address, phone number, or any account details (there are no accounts).</li>
@@ -78,7 +78,7 @@
       </tr>
     </tbody>
   </table>
-  <p>App backup is disabled (<code>allowBackup="false"</code>), so this data is excluded from Android's automatic cloud backup.</p>
+  <p>SvarLock also turns off Android's automatic backup for this data, so none of it gets copied to a cloud backup either.</p>
 
   <h2>4. Biometric unlock</h2>
   <p>If you turn on fingerprint or face unlock, SvarLock uses the standard Android <strong>BiometricPrompt</strong> system. Your biometric data is held by your device's secure hardware and the Android operating system. <strong>SvarLock never sees, receives, or stores your fingerprint or face data.</strong> All we keep is a simple on/off setting recording that you enabled biometric unlock.</p>
@@ -86,19 +86,19 @@
   <h2>5. Permissions we request, and why</h2>
   <p>SvarLock asks only for the permissions it needs to lock apps. Each is explained in the app before you are prompted.</p>
   <ul>
-    <li><strong>Usage Access (<code>PACKAGE_USAGE_STATS</code>)</strong>: to detect which app has come to the foreground, so the lock screen can appear over a locked app. We read this only in the moment to decide whether to show the lock screen. We do not build a profile of your usage, and nothing is transmitted.</li>
-    <li><strong>Display over other apps (<code>SYSTEM_ALERT_WINDOW</code>)</strong>: to show the SvarLock lock screen on top of a locked app.</li>
-    <li><strong>Run a foreground service (<code>FOREGROUND_SERVICE</code>, <code>FOREGROUND_SERVICE_SPECIAL_USE</code>)</strong>: to keep protection running quietly in the background.</li>
-    <li><strong>Start at boot (<code>RECEIVE_BOOT_COMPLETED</code>)</strong>: to restore protection after the device restarts.</li>
-    <li><strong>Ignore battery optimisation (<code>REQUEST_IGNORE_BATTERY_OPTIMIZATIONS</code>)</strong>: optional, lets you stop aggressive power-saving from killing the protection service.</li>
-    <li><strong>Biometrics (<code>USE_BIOMETRIC</code>, <code>USE_FINGERPRINT</code>)</strong>: to offer fingerprint/face unlock (see section 4).</li>
+    <li><strong>Usage Access</strong>: to detect which app has come to the foreground, so the lock screen can appear over a locked app. We read this only in the moment to decide whether to show the lock screen. We do not build a profile of your usage, and nothing is transmitted.</li>
+    <li><strong>Display over other apps</strong>: to show the SvarLock lock screen on top of a locked app.</li>
+    <li><strong>Run a foreground service</strong>: to keep protection running quietly in the background.</li>
+    <li><strong>Start at boot</strong>: to restore protection after the device restarts.</li>
+    <li><strong>Ignore battery optimisation</strong>: optional, lets you stop aggressive power-saving from killing the protection service.</li>
+    <li><strong>Biometrics</strong>: to offer fingerprint/face unlock (see section 4).</li>
     <li><strong>See installed apps</strong>: SvarLock can see every app on your device that has a launcher icon, the same list Android's own launcher uses. This is how it shows you the list of apps you can choose to lock, recognises your phone's home screen and its system uninstall screen so protection and uninstall protection behave correctly, and, on some phone brands, checks whether that brand's own battery or security app is installed so SvarLock can open the right settings screen for you. This list is used on-device only and is never sent anywhere.</li>
-    <li><strong>Post notifications (<code>POST_NOTIFICATIONS</code>, optional, off by default)</strong>: only requested if you turn on <strong>Protection alerts</strong> in Settings, never during setup, so SvarLock can tell you if protection turns off. Turning it on also makes a second, already-existing notification visible, the quiet one that shows while protection runs in the background, since Android turns notifications on or off for the whole app at once, not one at a time.</li>
+    <li><strong>Post notifications (optional, off by default)</strong>: only requested if you turn on <strong>Protection alerts</strong> in Settings, never during setup, so SvarLock can tell you if protection turns off. Turning it on also makes a second, already-existing notification visible, the quiet one that shows while protection runs in the background, since Android turns notifications on or off for the whole app at once, not one at a time.</li>
     <li><strong>Device administrator (optional, off by default)</strong>: only if you turn on uninstall (device-administrator) protection, so SvarLock can't be removed or force-stopped while that option is on. It enforces no other policies and does not change your device settings, passwords, or data.</li>
   </ul>
   <p>We do not request location, contacts, microphone, SMS, or storage permissions for your media. SvarLock does not request the Camera permission either, see the background checks section below for the one camera-related signal it does use.</p>
 
-  <h2>Background protection checks</h2>
+  <h3>Background protection checks</h3>
   <p>SvarLock periodically checks, entirely on your device, that protection is still running, roughly every few minutes, so it can restart itself if a phone's battery-saving system killed it in the background. This check reads no personal data and never leaves the device.</p>
   <p>If you turn on the optional <strong>Protection alerts</strong> toggle in Settings, SvarLock shows a notification when one of these checks finds that protection is off, so you can fix it without having to keep opening the app. This is off by default and only asks for the notification permission described above when you turn it on.</p>
   <p>Some camera apps can open faster than SvarLock's normal check can catch. To close that gap, SvarLock also listens for a simple on or off signal from Android: is the camera being used right now, not what it's pointed at or what it sees. This needs no Camera permission and gives SvarLock no access to any photo, video, or image, ever. SvarLock only uses this signal to decide whether to show the lock screen.</p>
