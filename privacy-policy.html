@@ -18,11 +18,11 @@
   </header>
 
   <h1>Privacy Policy for SvarLock</h1>
-  <p class="updated"><strong>Last updated: 18 July 2026</strong></p>
+  <p class="updated"><strong>Last updated: 21 July 2026</strong></p>
 
   <div class="card">
     <p><strong>The short version</strong></p>
-    <p>SvarLock runs entirely on your phone. It has <strong>no internet access</strong>, so it <strong>cannot</strong> send your data anywhere. Not to us, not to advertisers, not to anyone.</p>
+    <p>SvarLock runs entirely on your phone. It has <strong>no internet access</strong>, so it <strong>cannot transmit your data over the network</strong>. Not to us, not to advertisers, not to anyone.</p>
     <ul>
       <li>No account. No sign-up. No email required.</li>
       <li>No ads, no analytics, no tracking, no advertising IDs.</li>
@@ -91,7 +91,7 @@
     <li><strong>Start at boot (<code>RECEIVE_BOOT_COMPLETED</code>)</strong>: to restore protection after the device restarts.</li>
     <li><strong>Ignore battery optimisation (<code>REQUEST_IGNORE_BATTERY_OPTIMIZATIONS</code>)</strong>: optional, lets you stop aggressive power-saving from killing the protection service.</li>
     <li><strong>Biometrics (<code>USE_BIOMETRIC</code>, <code>USE_FINGERPRINT</code>)</strong>: to offer fingerprint/face unlock (see section 4).</li>
-    <li><strong>See specific other apps</strong>: to show the list of apps you can choose to lock, to recognise your phone's home screen and its system uninstall screen so protection and uninstall protection behave correctly, and, on some phone brands, to check whether that brand's own battery or security app is installed so SvarLock can open the right settings screen for you. SvarLock cannot see every app on your device, only these specific ones for these specific purposes, and none of it is ever sent anywhere.</li>
+    <li><strong>See installed apps</strong>: SvarLock can see every app on your device that has a launcher icon, the same list Android's own launcher uses. This is how it shows you the list of apps you can choose to lock, recognises your phone's home screen and its system uninstall screen so protection and uninstall protection behave correctly, and, on some phone brands, checks whether that brand's own battery or security app is installed so SvarLock can open the right settings screen for you. This list is used on-device only and is never sent anywhere.</li>
     <li><strong>Post notifications (<code>POST_NOTIFICATIONS</code>, optional, off by default)</strong>: only requested if you turn on <strong>Protection alerts</strong> in Settings, never during setup, so SvarLock can tell you if protection turns off. Turning it on also makes a second, already-existing notification visible, the quiet one that shows while protection runs in the background, since Android turns notifications on or off for the whole app at once, not one at a time.</li>
     <li><strong>Device administrator (optional, off by default)</strong>: only if you turn on uninstall (device-administrator) protection, so SvarLock can't be removed or force-stopped while that option is on. It enforces no other policies and does not change your device settings, passwords, or data.</li>
   </ul>
@@ -105,7 +105,7 @@
   <h2>6. The diagnostic log (test builds only, and only if you export it)</h2>
   <p>This section applies only to copies of SvarLock distributed to internal and closed testers. The version available to the public on Google Play's Production track does not include this feature at all, the code that would collect or export it is not present in that build.</p>
   <p>In those test builds, SvarLock keeps an in-memory, on-device diagnostic buffer of recent app-detection events to help testers and us troubleshoot reliability problems. This stays on the device unless <strong>you</strong> choose to export it.</p>
-  <p>If you tap <strong>Export diagnostic log</strong> in Settings, SvarLock writes the buffer to a file and opens Android's standard share sheet so you can send it wherever you choose (for example, to email it to support). That file may include the names or package IDs of apps recently detected in the foreground, the names of screens SvarLock showed, camera on or off events from the signal described in section 5 (never a photo, video, or image), and your device manufacturer, model, and Android version, to help with troubleshooting. Once you share it, the file is handled by whatever app or service you send it to, under that service's terms. We do not receive it automatically and have no way to access it.</p>
+  <p>If you tap <strong>Export diagnostic log</strong> in Settings, SvarLock writes the buffer to a file and opens Android's standard share sheet so you can send it wherever you choose (for example, to email it to support). That file may include the names or package IDs of apps recently detected in the foreground, the names of screens SvarLock showed, camera on or off events from the signal described in section 5 (never a photo, video, or image), and your device manufacturer, model, and Android version, to help with troubleshooting. Once you share it, the file is handled by whatever app or service you send it to, under that service's terms. We cannot access the file unless you choose to send it to us.</p>
 
   <h2>7. We do not share or sell your data</h2>
   <p>Because we don't collect your data, we have nothing to share, sell, rent, or disclose to third parties or advertisers. SvarLock contains no advertising or marketing trackers.</p>
@@ -126,10 +126,10 @@
   <p>SvarLock is a general-purpose utility and is not directed to children. It collects no personal information from anyone, including children.</p>
 
   <h2>11. Your privacy rights</h2>
-  <p>This section is written with reference to <strong>India's Digital Personal Data Protection Act (DPDP Act)</strong>, since that is the law that governs this policy (section 14). Under it, you may have rights to access, correct, delete, or port your personal data, and to object to its processing. SvarLock holds <strong>no personal data about you on any server</strong>, so there is nothing for us to retrieve, export, or erase on our end. All of your data already lives solely on your device and is entirely under your control, as described in section 9. If you believe you need to exercise a privacy right, contact us using the details below and we will respond as required.</p>
+  <p>This section is written with reference to <strong>India's Digital Personal Data Protection Act (DPDP Act)</strong>, since that is the law that governs this policy (section 14). Under it, you have the right to access information about how your personal data is processed, the right to correction and erasure of your personal data, the right to grievance redressal, and the right to nominate someone to exercise these rights on your behalf if you die or become incapacitated. SvarLock holds <strong>no personal data about you on any server</strong>, so there is nothing for us to retrieve, correct, or erase on our end. All of your data already lives solely on your device and is entirely under your control, as described in section 9. If you believe you need to exercise a privacy right, contact us using the details below and we will respond as required.</p>
 
   <h2>12. Security</h2>
-  <p>Your PIN is never stored in plain form. Only a salted SHA-256 hash is kept, from which the PIN cannot be recovered. All app data is held in SvarLock's private, sandboxed storage and is excluded from cloud backup. No system can guarantee perfect security, but because SvarLock keeps everything on-device and transmits nothing, the exposure surface is intentionally minimal.</p>
+  <p>Your PIN is never stored in plain form. Only a salted SHA-256 hash is kept, and the plain PIN itself is not stored anywhere. All app data is held in SvarLock's private, sandboxed storage and is excluded from cloud backup. No system can guarantee perfect security, but because SvarLock keeps everything on-device and transmits nothing, the exposure surface is intentionally minimal.</p>
 
   <h2>13. Changes to this policy</h2>
   <p>If we change how SvarLock handles data, we will update this policy and revise the "Last updated" date above. Material changes will be reflected in the app's store listing. Continuing to use the app after an update means you accept the revised policy.</p>
@@ -140,6 +140,7 @@
   <h2>15. Contact</h2>
   <p>Questions about this policy or your privacy? Contact:</p>
   <p><strong>SvarLock</strong><br>Email: <strong>svarlock.app@gmail.com</strong></p>
+  <p>If you contact support, send feedback, or (in test builds) email us a diagnostic log, we receive whatever you choose to send us: your email address, your message, and any attachment. We use it only to reply to you and to troubleshoot the issue you raised. We do not sell it, use it for advertising, or share it with third parties. We keep support emails for as long as we need them to help you and to keep a record of past issues; if you'd like us to delete one, contact us and we will remove it.</p>
 
   <footer class="site">
     <a href="index.html">&larr; Back</a> &middot; <a href="terms-of-service.html">Terms of Service</a>
