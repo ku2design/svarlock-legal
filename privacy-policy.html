@@ -18,7 +18,7 @@
   </header>
 
   <h1>Privacy Policy for SvarLock</h1>
-  <p class="updated"><strong>Last updated: 19 September 2026</strong></p>
+  <p class="updated"><strong>Last updated: 12 November 2026</strong></p>
 
   <div class="card">
     <p><strong>The short version</strong></p>
@@ -28,7 +28,8 @@
       <li>No ads, no analytics, no tracking, no advertising IDs.</li>
       <li>No servers. We never automatically receive your PIN, your app list, your usage, or your payment details.</li>
       <li>If you choose to email us for support, feedback, or (in test builds) a diagnostic log, that's different, see section 15 for what we receive then.</li>
-      <li>Everything SvarLock stores stays in the app's private storage on your device. It is not copied to a cloud backup, and Android's phone-to-phone transfer does not carry it to a new phone. Uninstall the app and it's gone.</li>
+      <li>Everything SvarLock stores stays in the app's private storage on your device. It is not copied to a cloud backup, and Android's phone-to-phone transfer does not carry it to a new phone. Uninstall the app and it's gone. This includes the photos, videos, and files you hide in the vault, so unhide them before you uninstall SvarLock or change phones.</li>
+      <li>The Pro vault reads only the photos, videos, and files you choose, and only on your phone.</li>
     </ul>
     <p>The sections below explain this in full.</p>
   </div>
@@ -42,10 +43,12 @@
   <ul>
     <li>Your name, email address, phone number, or any account details (there are no accounts).</li>
     <li>Your location.</li>
-    <li>Your contacts, messages, photos, or files.</li>
+    <li>Your contacts, messages, photos, or files. Photos, videos, and files you hide in the vault stay on your phone. They are never sent to us.</li>
     <li>Advertising identifiers or device fingerprints.</li>
     <li>Analytics, behavioural data, or usage statistics about how you use the app.</li>
   </ul>
+  <p>SvarLock accesses the photos, videos, and files that you choose to hide in the vault. This access happens only on your phone. It is not collection, because nothing leaves your phone.</p>
+
   <p>We have no servers and no back end. There is nothing for us to see, unless you choose to email us directly, see section 15.</p>
   <p>This is separate from Google Play itself. Google Play handles Pro purchases and may process payment, account, order, and tax information under <a href="https://policies.google.com/privacy">Google's own privacy policy</a>. If you've opted in to sharing diagnostics with Google on your device, the Play Store platform may also collect basic technical data (such as crash or app-not-responding reports) about apps you've installed, including SvarLock. Those collections happen outside our control and are governed by Google's policy, not this one.</p>
 
@@ -82,6 +85,16 @@
         <td>An in-memory list of recent app-detection events, cleared when SvarLock restarts. Only present in copies of SvarLock distributed to internal and closed testers, not in the version available to the public on Google Play. See section 6.</td>
       </tr>
       <tr>
+        <td><strong>Vault items</strong> (Pro)</td>
+        <td>So you can hide photos, videos, and files from your gallery and file manager</td>
+        <td>Each hidden item is stored encrypted in SvarLock's private storage, with an encrypted small preview for photos and videos. A small index on the device holds each item's name, type, size, the date you hid it, and the folder it came from, so SvarLock can show the list and put the item back when you unhide it. Items are encrypted with AES-256-GCM (Google Tink), with a key held by the Android Keystore on your device.</td>
+      </tr>
+      <tr>
+        <td>A <strong>temporary copy of a vault file you open</strong> (Pro)</td>
+        <td>So the PDF viewer, or the app you pick with <strong>Open in another app</strong>, can read the file</td>
+        <td>An unencrypted copy in SvarLock's private cache folder. SvarLock deletes it when you close the file, or the next time SvarLock starts.</td>
+      </tr>
+      <tr>
         <td>A small <strong>scheduling database</strong></td>
         <td>To run the background protection checks described in section 5</td>
         <td>Created by Android Jetpack WorkManager, the standard Android library for background work. It holds only the timing of those checks. It holds no personal data.</td>
@@ -94,25 +107,30 @@
   <p>If you turn on fingerprint or face unlock, SvarLock uses the standard Android <strong>BiometricPrompt</strong> system. Your biometric data is held by your device's secure hardware and the Android operating system. <strong>SvarLock never sees, receives, or stores your fingerprint or face data.</strong> All we keep is a simple on/off setting recording that you enabled biometric unlock.</p>
 
   <h2>5. Permissions we request, and why</h2>
-  <p>SvarLock asks only for the permissions it needs to lock apps. Each is explained in the app before you are prompted.</p>
+  <p>SvarLock asks only for the permissions it needs to lock apps and to run the vault. Each is explained in the app before you are prompted. For All files access, a vault screen explains what SvarLock does with it before Android Settings opens.</p>
   <ul>
     <li><strong>Usage Access</strong>: to detect which app has come to the foreground, so the lock screen can appear over a locked app. We read this only in the moment to decide whether to show the lock screen. We do not build a profile of your usage, and nothing is transmitted.</li>
     <li><strong>Display over other apps</strong>: to show the SvarLock lock screen on top of a locked app.</li>
     <li><strong>Run a foreground service</strong>: to keep protection running quietly in the background.</li>
     <li><strong>Start at boot</strong>: to restore protection after the device restarts.</li>
     <li><strong>Ignore battery optimisation</strong>: optional, lets you stop aggressive power-saving from killing the protection service.</li>
+    <li><strong>All files access (<code>MANAGE_EXTERNAL_STORAGE</code>, Pro, optional, Android 11 and later)</strong>: asked only when you choose to hide photos or videos in the vault, never during setup. You turn it on yourself in Android Settings, and you can turn it off there at any time. Android gives this permission access to all files in your phone's shared storage. SvarLock uses it only to list your photos and videos, to read the ones you pick, to remove those originals, and to put items back when you unhide them. SvarLock does not read, scan, or copy any other file. It lets SvarLock show your gallery inside the app, so you can pick what to hide, and remove the originals from your gallery after it copies them into the vault. SvarLock removes only the items you choose to hide. If you leave it off, SvarLock cannot hide photos and videos, but hiding files still works. On Android 10 and earlier, SvarLock uses Android's file picker instead and needs no extra permission to hide items.</li>
+    <li><strong>Storage (Android 8 and 9 only, optional)</strong>: asked only when you unhide items on these Android versions, so SvarLock can put them back in your gallery or Downloads folder.</li>
     <li><strong>Biometrics</strong>: to offer fingerprint/face unlock (see section 4).</li>
     <li><strong>See installed apps</strong>: SvarLock can see every app on your device that has a launcher icon, the same list Android's own launcher uses. This is how it shows you the list of apps you can choose to lock, recognises your phone's home screen and its system uninstall screen so protection and uninstall protection behave correctly, and, on some phone brands, checks whether that brand's own battery or security app is installed so SvarLock can open the right settings screen for you. This list is used on-device only and is never sent anywhere.</li>
     <li><strong>Post notifications (optional, off by default)</strong>: only requested if you turn on <strong>Protection alerts</strong> in Settings, never during setup, so SvarLock can tell you if protection turns off. Turning it on also makes a second, already-existing notification visible, the quiet one that shows while protection runs in the background, since Android turns notifications on or off for the whole app at once, not one at a time.</li>
     <li><strong>Device administrator (optional, off by default)</strong>: only if you turn on uninstall (device-administrator) protection, so SvarLock can't be removed or force-stopped while that option is on. It enforces no other policies and does not change your device settings, passwords, or data.</li>
     <li><strong>Two permissions that come from a library</strong>: SvarLock uses Android Jetpack WorkManager, the standard Android library for background work, to run the protection checks described below. That library adds <code>WAKE_LOCK</code> and <code>ACCESS_NETWORK_STATE</code> to the app. <code>WAKE_LOCK</code> lets a check finish before the device goes back to sleep. <code>ACCESS_NETWORK_STATE</code> only lets the library read whether the device is online. Neither one sends anything, and neither one can open a connection. Without the internet permission, no part of the app can reach the network.</li>
   </ul>
-  <p>We do not request location, contacts, microphone, SMS, or storage permissions for your media. SvarLock does not request the Camera permission either, see the background checks section below for the one camera-related signal it does use.</p>
+  <p>We do not request location, contacts, microphone, or SMS permissions. SvarLock reads your photos and videos only for the vault, as described above, and only on your device. SvarLock does not request the Camera permission either, see the background checks section below for the one camera-related signal it does use.</p>
 
   <h3>Background protection checks</h3>
   <p>SvarLock periodically checks, entirely on your device, that protection is still running, roughly every few minutes, so it can restart itself if a phone's battery-saving system killed it in the background. This check reads no personal data and never leaves the device.</p>
   <p>If you turn on the optional <strong>Protection alerts</strong> toggle in Settings, SvarLock shows a notification when one of these checks finds that protection is off, so you can fix it without having to keep opening the app. This is off by default and only asks for the notification permission described above when you turn it on.</p>
   <p>Some camera apps can open faster than SvarLock's normal check can catch. To close that gap, SvarLock also listens for a simple on or off signal from Android: is the camera being used right now, not what it's pointed at or what it sees. This needs no Camera permission and gives SvarLock no access to any photo, video, or image, ever. SvarLock only uses this signal to decide whether to show the lock screen.</p>
+
+  <h3>Opening a hidden file in another app</h3>
+  <p>SvarLock shows photos, videos, and PDFs inside the app. For other file types, such as a .docx or .zip file, you can choose <strong>Open in another app</strong>. SvarLock then hands that one file to the app you pick. That app can read the file and could save its own copy, under that app's own terms. SvarLock asks you before it does this.</p>
 
   <h2>6. The diagnostic log (test builds only, and only if you export it)</h2>
   <p>This section applies only to copies of SvarLock distributed to internal and closed testers. In the version available to the public on Google Play's Production track, this feature is turned off and unreachable: a build flag disables it, so nothing in that build can collect or export a diagnostic log.</p>
@@ -120,7 +138,7 @@
   <p>If you tap <strong>Export diagnostic log</strong> in Settings, SvarLock writes the buffer to a file and opens Android's standard share sheet so you can send it wherever you choose (for example, to email it to support). That file may include the names or package IDs of apps recently detected in the foreground, the names of screens SvarLock showed, camera on or off events from the signal described in section 5 (never a photo, video, or image), and your device manufacturer, model, and Android version, to help with troubleshooting. Once you share it, the file is handled by whatever app or service you send it to, under that service's terms. We cannot access the file unless you choose to send it to us. The file also stays in SvarLock's private cache folder on your device. Each new export replaces it. To remove it, open Android Settings → Apps → SvarLock → Storage and clear the cache. It also goes when you remove the app.</p>
 
   <h2>7. We do not share or sell your data</h2>
-  <p>Because we don't automatically collect your app data, we have nothing to share, sell, rent, or disclose to third parties or advertisers. Google Play processes Pro purchases separately, as described in section 8. Information you choose to email us is processed by Google, our email provider, as described in section 15. SvarLock contains no advertising or marketing trackers.</p>
+  <p>Because we don't automatically collect your app data, we have nothing to share, sell, rent, or disclose to third parties or advertisers. Google Play processes Pro purchases separately, as described in section 8. Information you choose to email us is processed by Google, our email provider, as described in section 15. SvarLock contains no advertising or marketing trackers. When you choose <strong>Open in another app</strong>, you send that file to the app that you pick. We do not share it.</p>
 
   <h2>8. Purchases</h2>
   <p>SvarLock is free and lets you lock up to 3 apps. SvarLock Pro is a one-time Google Play purchase that removes this limit and includes future Pro features. Google Play processes the payment and may handle payment, account, order, and tax information under <a href="https://policies.google.com/privacy">Google's privacy policy</a>. SvarLock does not receive your card, bank, or billing details.</p>
@@ -131,7 +149,8 @@
   <ul>
     <li><strong>Change or reset your settings</strong> inside the app at any time.</li>
     <li><strong>Clear the app's storage</strong> from Android Settings → Apps → SvarLock → Storage.</li>
-    <li><strong>Uninstall SvarLock</strong> to delete all of its on-device data. If you turned on uninstall (device-administrator) protection, turn that off first so the app can be removed.</li>
+    <li><strong>Uninstall SvarLock</strong> to delete all of its on-device data, including every item in the vault. Clearing the app's storage also deletes the vault. Unhide your items first if you want to keep them. If you turned on uninstall (device-administrator) protection, turn that off first so the app can be removed.</li>
+    <li><strong>Vault items</strong> stay until you unhide them, delete them, clear the app's storage, or uninstall SvarLock. If you turn off All files access, the items that are already in the vault stay there.</li>
   </ul>
   <p>Since none of your data reaches us automatically, there is no copy on our side to request or delete, other than anything you've chosen to email us. See section 15 for how to have that removed.</p>
 
@@ -142,7 +161,7 @@
   <p>This section is written with reference to <strong>India's Digital Personal Data Protection Act (DPDP Act)</strong>, since that is the law that governs this policy (section 14). Under it, you have the right to access information about how your personal data is processed, the right to correction and erasure of your personal data, the right to grievance redressal, and the right to nominate someone to exercise these rights on your behalf if you die or become incapacitated. SvarLock holds <strong>no personal data about you on any server</strong>, except anything you've chosen to email us. Beyond that, there is nothing for us to retrieve, correct, or erase on our end. All of your data already lives solely on your device and is entirely under your control, as described in section 9. If you believe you need to exercise a privacy right, contact us using the details below and we will respond as required.</p>
 
   <h2>12. Security</h2>
-  <p>Your PIN is never stored in plain form. Only a salted SHA-256 hash is kept, and the plain PIN itself is not stored anywhere. If you set security questions, your answers are protected the same way: each is stored as a salted PBKDF2 hash, and the answers themselves are not stored anywhere. All app data is held in SvarLock's private, sandboxed storage. It is excluded from cloud backup, and from Android's phone-to-phone transfer, so the stored PIN hash stays on the phone that created it. No system can guarantee perfect security, but because SvarLock keeps your app data on-device and does not send it to our servers, the exposure surface is intentionally minimal.</p>
+  <p>Your PIN is never stored in plain form. Only a salted SHA-256 hash is kept, and the plain PIN itself is not stored anywhere. If you set security questions, your answers are protected the same way: each is stored as a salted PBKDF2 hash, and the answers themselves are not stored anywhere. All app data is held in SvarLock's private, sandboxed storage. It is excluded from cloud backup, and from Android's phone-to-phone transfer, so the stored PIN hash stays on the phone that created it. Items in the vault are also encrypted with AES-256-GCM (Google Tink), with a key held by the Android Keystore. No system can guarantee perfect security, but because SvarLock keeps your app data on-device and does not send it to our servers, the exposure surface is intentionally minimal.</p>
 
   <h2>13. Changes to this policy</h2>
   <p>If we change how SvarLock handles data, we will update this policy and revise the "Last updated" date above. Material changes will be reflected in the app's store listing. Continuing to use the app after an update means you accept the revised policy.</p>
